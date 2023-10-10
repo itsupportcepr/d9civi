@@ -1,0 +1,23 @@
+uuid: 383b9ebe-9b07-49f5-b2f5-4310accc93f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shirt_number
+    - node.type.player
+id: node.player.field_shirt_number
+field_name: field_shirt_number
+entity_type: node
+bundle: player
+label: 'Shirt Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

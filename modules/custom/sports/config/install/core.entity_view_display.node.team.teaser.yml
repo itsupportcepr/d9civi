@@ -1,0 +1,32 @@
+uuid: 79867472-e197-4f03-b080-4a62cecc6e32
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.team.field_city
+    - field.field.node.team.field_country
+    - field.field.node.team.field_sports
+    - field.field.node.team.field_street_address_1
+    - field.field.node.team.field_street_address_2
+    - field.field.node.team.field_team_image
+    - node.type.team
+  module:
+    - user
+id: node.team.teaser
+targetEntityType: node
+bundle: team
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_city: true
+  field_country: true
+  field_sports: true
+  field_street_address_1: true
+  field_street_address_2: true
+  field_team_image: true
