@@ -1,0 +1,8 @@
+#file: noinspection YAMLSchemaValidation
+name: SportsPlus
+type: module
+description: Customizes the Sports module
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - sports

@@ -1,0 +1,30 @@
+(function ($,) {
+
+  $(document).ready(function () {
+    // Attach a click event handler to your link element.
+    $('.open-player-address-modal').click(function (e) {
+      e.preventDefault();
+
+      let player_id = $(this).data('player-id');
+
+      $.ajax({
+        url: `/sportsplus/player/address/${player_id}`,
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          console.log(data)
+          Swal.fire({
+            title: `<strong>${data.modal.title}</strong>`,
+            iconHtml: '<img src="https://picsum.photos/100/100">',
+            html: data.modal.content,
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Great!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+          })
+        },
+      });
+    });
+  });
+})(jQuery);

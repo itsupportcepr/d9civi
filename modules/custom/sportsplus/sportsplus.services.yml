@@ -1,0 +1,6 @@
+services:
+  sportsplus.event_subscriber:
+    class: Drupal\sportsplus\EventSubscriber\SportsplusSubscriber
+    arguments: ['@messenger']
+    tags:
+      - { name: event_subscriber }

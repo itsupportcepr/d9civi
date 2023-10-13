@@ -1,0 +1,11 @@
+# Custom module library for general purposes.
+sportsplus:
+  version: 1.x
+  js:
+    js/sportsplus.js: {}
+  dependencies:
+    - core/jquery
+
+sportsplus-sweetalert:
+  js:
+    "https://cdn.jsdelivr.net/npm/sweetalert2@11": { type: external, minified: true }

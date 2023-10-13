@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file SportsplusSubscriber
+ * Primary module hooks for SportsPlus module.
+ */
+
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_theme().
+ */
+function sportsplus_theme($existing, $type, $theme, $path): array
+{
+  return [
+    'player_address_modal' => [
+      'variables' => [
+        'address' => null,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function sportsplus_page_attachments(array &$page): void
+{
+  $page['#attached']['library'][] = 'sportsplus/sportsplus';
+  $page['#attached']['library'][] = 'sportsplus/sportsplus-sweetalert';
+}
+
+/**
+ *
+ * Implements hook_preprocess_views_view_field().
+ */
+function sportsplus_preprocess_views_view_field(array &$variables): void
+{
+  if ($variables['field']->field == 'field_city') {
+
+    $span = [
+      '#type' => 'html_tag',
+      '#tag' => 'span',
+      '#value' => $variables['output'],
+      '#attributes' => [
+        'class' => ['open-player-address-modal', ''],
+        'data-city' => $variables['output'],
+        'data-player-id' => $variables['row']->nid,
+      ],
+    ];
+
+    $link = Link::fromTextAndUrl($span, Url::fromRoute(
+      'sportsplus.player_address', ['player_id' => $variables['row']->nid]));
+
+    $variables['output'] = $link;
+  }
+}
+
+/**
+ * Returns the render array for the players modal
+ * @param $city
+ * @return array
+ */
+function sportsplus_player_address_modal($city): array
+{
+  $build = [];
+  $build['#city'] = $city;
+  return $build;
+}
