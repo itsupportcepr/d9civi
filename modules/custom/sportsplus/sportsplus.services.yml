@@ -4,3 +4,7 @@ services:
     arguments: ['@messenger']
     tags:
       - { name: event_subscriber }
+
+  sportsplus.player_service:
+    class: Drupal\sportsplus\PlayerService
+    arguments: ['@database']

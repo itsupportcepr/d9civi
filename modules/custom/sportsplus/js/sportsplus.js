@@ -14,8 +14,8 @@
         success: function (data) {
           console.log(data)
           Swal.fire({
-            title: `<strong>${data.modal.title}</strong>`,
-            iconHtml: '<img src="https://picsum.photos/100/100">',
+            title: `<strong>${data.modal.title} <br/> #${data.modal.player_shirt_number}</strong>`,
+            iconHtml: `<img src="${data.modal.player_image}" alt="" style="border-radius: 6rem;">`,
             html: data.modal.content,
             showCloseButton: true,
             focusConfirm: false,

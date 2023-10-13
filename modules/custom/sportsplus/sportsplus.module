@@ -7,6 +7,17 @@
 
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\sportsplus\Event\UserLoginEvent;
+
+/**
+ * Implements hook_user_login().
+ */
+function sportsplus_user_login($account): void
+{
+  $event = new UserLoginEvent($account);
+  $event_dispatcher = Drupal::service('event_dispatcher');
+  $event_dispatcher->dispatch(UserLoginEvent::EVENT_NAME, $event);
+}
 
 /**
  * Implements hook_theme().
@@ -41,19 +52,18 @@ function sportsplus_preprocess_views_view_field(array &$variables): void
 
     $span = [
       '#type' => 'html_tag',
-      '#tag' => 'span',
+      '#tag' => 'a',
       '#value' => $variables['output'],
       '#attributes' => [
         'class' => ['open-player-address-modal', ''],
         'data-city' => $variables['output'],
         'data-player-id' => $variables['row']->nid,
+        'style' => 'cursor: pointer;',
       ],
     ];
 
-    $link = Link::fromTextAndUrl($span, Url::fromRoute(
-      'sportsplus.player_address', ['player_id' => $variables['row']->nid]));
 
-    $variables['output'] = $link;
+    $variables['output'] = $span;
   }
 }
 
