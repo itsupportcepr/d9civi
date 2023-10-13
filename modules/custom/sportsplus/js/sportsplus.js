@@ -1,7 +1,6 @@
 (function ($,) {
 
   $(document).ready(function () {
-    // Attach a click event handler to your link element.
     $('.open-player-address-modal').click(function (e) {
       e.preventDefault();
 
