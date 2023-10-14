@@ -9,6 +9,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\sportsplus\Event\UserLoginEvent;
+use Drupal\sportsplus\Event\TeamSavedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -40,7 +41,7 @@ class SportsplusSubscriber implements EventSubscriberInterface {
    *   Response event.
    * @throws EntityMalformedException
    */
-  public function onUserLogin( $event): void
+  public function onUserLogin( $event ): void
   {
     $current_user_mail = $event->account->getEmail();
     $players = Drupal::service('sportsplus.player_service')->getAllPlayers(['entity_id','field_email_value']);
@@ -53,7 +54,20 @@ class SportsplusSubscriber implements EventSubscriberInterface {
         $this->messenger->addMessage(t('Welcome back! You can view your player profile at @link', ['@link' => $player_node_link]));
       }
     }
+  }
 
+  /**
+   * Team saved event handler.
+   *
+   * @param  $event
+   *   Response event.
+   */
+  public function onTeamSaved( $event ): void
+  {
+    $team = $event->team;
+    Drupal::service('sportsplus.team_service')->createCiviCRMContact($team);
+    $this->messenger->addMessage(t('Team @name \'s contact and address have been saved in CiviCRM.',
+      ['@name' => $team->getTitle()]));
   }
 
   /**
@@ -63,6 +77,7 @@ class SportsplusSubscriber implements EventSubscriberInterface {
   {
     return [
       UserLoginEvent::EVENT_NAME => 'onUserLogin',
+      TeamSavedEvent::EVENT_NAME => 'onTeamSaved',
     ];
   }
 
