@@ -30,6 +30,14 @@ function sportsplus_theme($existing, $type, $theme, $path): array
         'address' => null,
       ],
     ],
+    'node__player' => [
+      'template' => 'node--player',
+      'base hook' => 'node'
+    ],
+    'node__team' => [
+      'template' => 'node--team',
+      'base hook' => 'node'
+    ],
   ];
 }
 
@@ -61,7 +69,6 @@ function sportsplus_preprocess_views_view_field(array &$variables): void
         'style' => 'cursor: pointer;',
       ],
     ];
-
 
     $variables['output'] = $span;
   }
