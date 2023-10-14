@@ -52,6 +52,13 @@ function sportsplus_theme($existing, $type, $theme, $path): array
       'template' => 'node--team',
       'base hook' => 'node'
     ],
+    'civicrm_teams_block' => [
+      'template' => 'team-list',
+      'base hook' => 'page',
+      'variables' => [
+        'teams' => null, // The team data to pass to the template.
+      ]
+    ],
   ];
 }
 
@@ -62,6 +69,7 @@ function sportsplus_page_attachments(array &$page): void
 {
   $page['#attached']['library'][] = 'sportsplus/sportsplus';
   $page['#attached']['library'][] = 'sportsplus/sportsplus-sweetalert';
+  $page['#attached']['library'][] = 'sportsplus/sportsplus-components';
 }
 
 /**

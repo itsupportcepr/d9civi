@@ -1,0 +1,13 @@
+<div class="team-list">
+  {% for team in teams %}
+    <div class="team">
+      <div class="team-image">
+        <img alt="" src="{{ team.image }}">
+      </div>
+      <div class="team-info">
+        <h3>{{ team.title }}</h3>
+        <a href="{{ team.node_url }}">{{ 'View team'|t }}</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>

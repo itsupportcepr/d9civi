@@ -17,6 +17,7 @@ use Drupal\Core\Url;
 class TeamService {
 
   protected $civicrmService;
+
   /**
    * Constructs a new TeamService object.
    */
@@ -43,11 +44,13 @@ class TeamService {
         ->addValue('image_URL', $team_image_url)
         ->addValue('display_name',  $team->getTitle())
         ->addValue('organization_name', $team->getTitle())
+        ->addValue('external_identifier', 'sportsplus_team_'.$team->id())
         ->addValue('legal_name', $team->getTitle())
         ->execute();
 
       $contact_id = $results->first()['id'];
       $this->createCiviCRMAddress($team, $contact_id);
+      drupal_flush_all_caches(); //probably not the best idea
     } catch (\Exception $e) {
       Drupal::logger('sportsplus')->error($e->getMessage());
     }
@@ -76,6 +79,37 @@ class TeamService {
       Drupal::logger('sportsplus')->error($e->getMessage());
     }
 
+  }
+
+  /**
+   * Gets all teams from CIVICRM.
+   * @param int $limit
+   * @return array
+   * @throws CRM_Core_Exception
+   * @throws UnauthorizedException
+   */
+  public function getTeams(Int $limit = 5): array
+  {
+    $contacts = Contact::get(TRUE)
+      ->addSelect('contact_type', 'external_identifier', 'organization_name', 'display_name', 'image_URL')
+      ->addWhere('contact_type', '=', 'Organization')
+      ->addWhere('external_identifier', 'CONTAINS', 'sportsplus_team_')
+      ->setLimit($limit)
+      ->execute();
+
+    $teams = [];
+    foreach ($contacts as $contact) {
+      $nid = str_replace('sportsplus_team_', '', $contact['external_identifier']);
+      $nodeUrl = Url::fromRoute('entity.node.canonical', ['node' => $nid])->toString();
+      $teams[] = [
+        'id' => $nid,
+        'title' => $contact['display_name'],
+        'image' => $contact['image_URL'],
+        'node_url' => $nodeUrl,
+      ];
+    }
+
+    return $teams;
   }
 
   public function create(ContainerInterface $container): TeamService
