@@ -95,15 +95,3 @@ function sportsplus_preprocess_views_view_field(array &$variables): void
     $variables['output'] = $span;
   }
 }
-
-/**
- * Returns the render array for the players modal
- * @param $city
- * @return array
- */
-function sportsplus_player_address_modal($city): array
-{
-  $build = [];
-  $build['#city'] = $city;
-  return $build;
-}

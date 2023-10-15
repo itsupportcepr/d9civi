@@ -43,7 +43,6 @@ class PlayerService {
         'field_position',
         'field_team',
       ];
-
     }
     $query->fields('n', $fields);
     return $query->execute()->fetchAll();

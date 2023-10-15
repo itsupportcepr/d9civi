@@ -1,4 +1,4 @@
-(function ($,) {
+(function ($) {
 
   $(document).ready(function () {
     $('.open-player-address-modal').click(function (e) {
@@ -26,4 +26,4 @@
       });
     });
   });
-})(jQuery);
+})($);

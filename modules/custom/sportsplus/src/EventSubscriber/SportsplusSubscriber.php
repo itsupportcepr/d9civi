@@ -66,7 +66,7 @@ class SportsplusSubscriber implements EventSubscriberInterface {
   {
     $team = $event->team;
     Drupal::service('sportsplus.team_service')->createCiviCRMContact($team);
-    $this->messenger->addMessage(t('Team @name \'s contact and address have been saved in CiviCRM.',
+    $this->messenger->addMessage(t('Team @name\'s contact and address have been saved in CiviCRM.',
       ['@name' => $team->getTitle()]));
   }
 
