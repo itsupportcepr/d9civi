@@ -1,0 +1,8 @@
+#sportsplus player address route
+sportsplus.player_address:
+  path: '/sportsplus/player/address/{player_id}'
+  defaults:
+    _controller: '\Drupal\sportsplus\Controller\SportsplusController::playerAddress'
+    _title: 'Player Address'
+  requirements:
+    _permission: 'access content'

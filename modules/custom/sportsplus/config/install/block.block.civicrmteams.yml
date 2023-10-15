@@ -1,0 +1,20 @@
+uuid: 9d349312-8f94-4f2a-9ce4-62b7fadd9fa8
+langcode: en
+status: true
+dependencies:
+  module:
+    - sportsplus
+  theme:
+    - bartik
+id: civicrmteams
+theme: bartik
+region: sidebar_first
+weight: 0
+provider: null
+plugin: sportsplus_civicrm_teams
+settings:
+  id: sportsplus_civicrm_teams
+  label: 'CiviCRM Teams'
+  label_display: visible
+  provider: sportsplus
+visibility: {  }

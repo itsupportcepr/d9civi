@@ -1,0 +1,36 @@
+uuid: 635496de-f915-464e-bb5b-52319bd2bbb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.player.field_dob
+    - field.field.node.player.field_email
+    - field.field.node.player.field_gender
+    - field.field.node.player.field_joining_date
+    - field.field.node.player.field_player_image
+    - field.field.node.player.field_position
+    - field.field.node.player.field_shirt_number
+    - field.field.node.player.field_team
+    - node.type.player
+  module:
+    - user
+id: node.player.teaser
+targetEntityType: node
+bundle: player
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_dob: true
+  field_email: true
+  field_gender: true
+  field_joining_date: true
+  field_player_image: true
+  field_position: true
+  field_shirt_number: true
+  field_team: true
