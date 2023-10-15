@@ -8,3 +8,7 @@ services:
   sportsplus.player_service:
     class: Drupal\sportsplus\PlayerService
     arguments: ['@database']
+
+  sportsplus.team_service:
+    class: Drupal\sportsplus\TeamService
+    arguments: ['@civicrm']

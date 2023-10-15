@@ -5,8 +5,10 @@
  * Primary module hooks for SportsPlus module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\sportsplus\Event\TeamSavedEvent;
 use Drupal\sportsplus\Event\UserLoginEvent;
 
 /**
@@ -17,6 +19,18 @@ function sportsplus_user_login($account): void
   $event = new UserLoginEvent($account);
   $event_dispatcher = Drupal::service('event_dispatcher');
   $event_dispatcher->dispatch(UserLoginEvent::EVENT_NAME, $event);
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function sportsplus_entity_insert(EntityInterface $entity ): void
+{
+  if ($entity->getEntityTypeId() == 'node' && $entity->bundle() === 'team') {
+    $event = new TeamSavedEvent($entity);
+    $event_dispatcher = Drupal::service('event_dispatcher');
+    $event_dispatcher->dispatch(TeamSavedEvent::EVENT_NAME, $event);
+  }
 }
 
 /**
@@ -38,6 +52,13 @@ function sportsplus_theme($existing, $type, $theme, $path): array
       'template' => 'node--team',
       'base hook' => 'node'
     ],
+    'civicrm_teams_block' => [
+      'template' => 'team-list',
+      'base hook' => 'page',
+      'variables' => [
+        'teams' => null, // The team data to pass to the template.
+      ]
+    ],
   ];
 }
 
@@ -48,6 +69,7 @@ function sportsplus_page_attachments(array &$page): void
 {
   $page['#attached']['library'][] = 'sportsplus/sportsplus';
   $page['#attached']['library'][] = 'sportsplus/sportsplus-sweetalert';
+  $page['#attached']['library'][] = 'sportsplus/sportsplus-components';
 }
 
 /**

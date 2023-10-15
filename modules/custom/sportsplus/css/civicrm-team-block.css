@@ -1,0 +1,42 @@
+
+.team {
+  display: flex;
+  margin: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 93%;
+  border-radius: 6px;
+  background: #1a463f;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+.team-image img {
+  max-width: 47px;
+  margin-right: 20px;
+  border-radius: 100%;
+}
+
+.team-info {
+  flex-grow: 1;
+}
+
+.team h3 {
+  margin: 0;
+  font-size: 1.092em;
+  font-weight: bold;
+}
+
+.team a {
+  display: block;
+  margin-top: 10px;
+  color: #1ff4ff;
+}
+
+.team a:hover {
+  display: block;
+  margin-top: 10px;
+  color: #fff;
+}
+
+

@@ -9,3 +9,8 @@ sportsplus:
 sportsplus-sweetalert:
   js:
     "https://cdn.jsdelivr.net/npm/sweetalert2@11": { type: external, minified: true }
+
+sportsplus-components:
+  css:
+    theme:
+      css/civicrm-team-block.css: { external: false, minified: false }
