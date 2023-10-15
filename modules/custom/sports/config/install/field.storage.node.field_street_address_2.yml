@@ -1,0 +1,21 @@
+uuid: ca630ef3-77d8-44c3-88c8-b1d2443a9a1f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_street_address_2
+field_name: field_street_address_2
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
